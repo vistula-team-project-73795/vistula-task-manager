@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task Manager</title>
+  <style>
+    :root { --bg:#f6f7f9; --card:#fff; --text:#1d2433; --muted:#6b7280; --line:#e2e5ea; --accent:#2f5bea; --danger:#c62828; --ok:#2e7d32; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#14171d; --card:#1d222b; --text:#e8eaf0; --muted:#9aa3b2; --line:#2c3340; --accent:#7c9bff; --danger:#ef7b7b; --ok:#7fd48a; }
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,"Segoe UI",sans-serif; line-height:1.5; }
+    main { max-width:640px; margin:0 auto; padding:32px 16px 64px; }
+    h1 { margin:0 0 4px; font-size:1.8rem; }
+    .sub { color:var(--muted); margin:0 0 24px; }
+    form { display:flex; flex-direction:column; gap:10px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:12px; }
+    input[type=text] { padding:10px; font:inherit; color:var(--text); background:var(--bg); border:1px solid var(--line); border-radius:6px; }
+    input:focus-visible, button:focus-visible, a:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+    button { font:inherit; cursor:pointer; padding:8px 12px; border-radius:6px; border:1px solid var(--line); background:var(--card); color:var(--text); }
+    button.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+    .form-actions { display:flex; gap:8px; }
+    #status-message { min-height:1.5em; margin:8px 0 16px; font-size:.95rem; }
+    #status-message.error { color:var(--danger); }
+    #status-message.ok { color:var(--ok); }
+    .task-item { display:flex; flex-direction:column; gap:6px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:10px; }
+    .task-item.done .task-title { text-decoration:line-through; color:var(--muted); }
+    .task-title { font-weight:600; }
+    .task-description { color:var(--muted); }
+    .task-status { font-size:.85rem; color:var(--muted); }
+    .task-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:4px; }
+    .delete-task { color:var(--danger); }
+    .empty { color:var(--muted); text-align:center; padding:24px 0; }
+    footer { margin-top:32px; }
+    a { color:var(--accent); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Task Manager</h1>
+    <p class="sub">Student ID: <span id="student-id">73795</span></p>
+
+    <form id="task-form">
+      <input type="text" id="task-title" placeholder="Task title" required>
+      <input type="text" id="task-description" placeholder="Description (optional)">
+      <div class="form-actions">
+        <button type="submit" id="task-submit" class="primary">Add task</button>
+        <button type="button" id="task-cancel" hidden>Cancel edit</button>
+      </div>
+    </form>
+
+    <div id="status-message" role="status" aria-live="polite"></div>
+    <div id="task-list"></div>
+
+    <footer><a id="contribution-link" href="contribution.html">Team contribution page</a></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
